@@ -2,7 +2,7 @@ module.exports = function (db, length, callback) {
 
   var after = function (err) {
         if (err) throw err
-        cb()
+        callback()
       }
     , batch = db.batch()
 
