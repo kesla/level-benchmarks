@@ -4,9 +4,9 @@ var series = require('run-series')
 
   , tests = {
         'put(int, string)'  : require('./tests/put-int-string.js')
-      // , 'get(int):string'   : require('./tests/get-int.js')
-      // , 'batch(int, string)': require('./tests/batch-int-string.js')
-      // , 'readStream'        : require('./tests/read-stream.js')
+      , 'get(int):string'   : require('./tests/get-int.js')
+      , 'batch(int, string)': require('./tests/batch-int-string.js')
+      , 'readStream'        : require('./tests/read-stream.js')
     }
 
   , runTest = function (db, name, test, length, callback) {
