@@ -6,6 +6,10 @@ Run benchmarks against levelup-compatible engines
 
 [![NPM](https://nodei.co/npm-dl/level-benchmarks.png)](https://nodei.co/npm/level-benchmarks/)
 
+## Kudos
+
+This is based upon the tests in [levelup](https://www.npmjs.org/package/levelup).
+
 ## Installation
 
 ```
