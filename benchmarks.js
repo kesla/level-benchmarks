@@ -27,13 +27,23 @@ var series = require('run-series')
 
   , benchmarks = function (engines, lengths) {
       var tasks = []
+        , printableEngineName = function (engineName) {
+            var len = engines.reduce(
+                function (m, c) {
+                  return Math.max(c.name.length, m)
+                }
+              , 0
+            )
+            while (engineName.length < len) engineName += ' '
+            return engineName
+          }
 
       Object.keys(tests).forEach(function (key) {
         var test = tests[key]
 
         lengths.forEach(function (length) {
           engines.forEach(function (engine) {
-            var name = engine.name + ' ' + key + ' x ' + length
+            var name = printableEngineName(engine.name) + ' ' + key + ' x ' + length
 
             tasks.push(function (done) {
               engine.factory(name, function (err, db) {
