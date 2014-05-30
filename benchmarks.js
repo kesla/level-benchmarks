@@ -51,6 +51,10 @@ var series = require('run-series')
               })
             })
           })
+          tasks.push(function (done) {
+            console.log()
+            done()
+          })
         })
       })
 
