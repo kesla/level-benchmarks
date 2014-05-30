@@ -1,0 +1,23 @@
+{
+  "name": "level-benchmarks",
+  "version": "0.0.0",
+  "description": "Run benchmarks against levelup-compatible engines",
+  "main": "benchmarks.js",
+  "scripts": {
+    "test": "node example"
+  },
+  "keywords": [
+    "levelup",
+    "benchmark",
+    "performance"
+  ],
+  "author": "David Björklund <david.bjorklund@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "level-test": "^1.6.3"
+  },
+  "dependencies": {
+    "benchmark": "^1.0.0",
+    "run-series": "^1.0.2"
+  }
+}
