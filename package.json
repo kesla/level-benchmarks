@@ -1,6 +1,6 @@
 {
   "name": "level-benchmarks",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Run benchmarks against levelup-compatible engines",
   "main": "benchmarks.js",
   "scripts": {
