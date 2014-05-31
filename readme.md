@@ -41,62 +41,41 @@ var engines = [
             }
         }
     ]
-  , lengths = [ 10, 1000, 10000, 100000 ]
+  , lengths = [ 10 ]
   , benchmarks = require('./benchmarks')
 
-benchmarks(engines, lengths)
+benchmarks(engines, lengths, { maxTime: 1 }, function (err, result) {
+  Object.keys(result).forEach(function (testName) {
+    var lengths = result[testName]
+
+    Object.keys(lengths).forEach(function (length) {
+      var engines = lengths[length]
+
+      Object.keys(engines).forEach(function (engine) {
+        var benchmark = engines[engine]
+
+        console.log(benchmark.target.toString())
+      })
+      console.log()
+    })
+  })
+})
 ```
 
 ### Output
 
 ```
-levelup (leveldown) put(int, string) x 10 x 579 ops/sec ±0.88% (62 runs sampled)
-levelup (memdown)   put(int, string) x 10 x 648 ops/sec ±0.52% (69 runs sampled)
+levelup (leveldown) put(int, string) x 10 x 616 ops/sec ±2.98% (20 runs sampled)
+levelup (memdown)   put(int, string) x 10 x 743 ops/sec ±1.97% (20 runs sampled)
 
-levelup (leveldown) put(int, string) x 1000 x 51.28 ops/sec ±1.89% (64 runs sampled)
-levelup (memdown)   put(int, string) x 1000 x 139 ops/sec ±2.88% (83 runs sampled)
+levelup (leveldown) get(int):string x 10 x 611 ops/sec ±1.23% (20 runs sampled)
+levelup (memdown)   get(int):string x 10 x 706 ops/sec ±1.12% (20 runs sampled)
 
-levelup (leveldown) put(int, string) x 10000 x 5.65 ops/sec ±1.77% (32 runs sampled)
-levelup (memdown)   put(int, string) x 10000 x 17.34 ops/sec ±0.93% (83 runs sampled)
+levelup (leveldown) batch(int, string) x 10 x 659 ops/sec ±1.69% (17 runs sampled)
+levelup (memdown)   batch(int, string) x 10 x 659 ops/sec ±1.35% (10 runs sampled)
 
-levelup (leveldown) put(int, string) x 100000 x 0.48 ops/sec ±4.18% (7 runs sampled)
-levelup (memdown)   put(int, string) x 100000 x 1.35 ops/sec ±15.59% (12 runs sampled)
-
-levelup (leveldown) get(int):string x 10 x 592 ops/sec ±0.58% (42 runs sampled)
-levelup (memdown)   get(int):string x 10 x 657 ops/sec ±0.62% (68 runs sampled)
-
-levelup (leveldown) get(int):string x 1000 x 58.64 ops/sec ±1.34% (72 runs sampled)
-levelup (memdown)   get(int):string x 1000 x 150 ops/sec ±0.47% (89 runs sampled)
-
-levelup (leveldown) get(int):string x 10000 x 6.27 ops/sec ±1.69% (35 runs sampled)
-levelup (memdown)   get(int):string x 10000 x 18.03 ops/sec ±1.27% (86 runs sampled)
-
-levelup (leveldown) get(int):string x 100000 x 0.55 ops/sec ±1.40% (7 runs sampled)
-levelup (memdown)   get(int):string x 100000 x 1.35 ops/sec ±1.49% (11 runs sampled)
-
-levelup (leveldown) batch(int, string) x 10 x 619 ops/sec ±0.60% (55 runs sampled)
-levelup (memdown)   batch(int, string) x 10 x 656 ops/sec ±0.48% (70 runs sampled)
-
-levelup (leveldown) batch(int, string) x 1000 x 118 ops/sec ±1.03% (72 runs sampled)
-levelup (memdown)   batch(int, string) x 1000 x 166 ops/sec ±1.00% (87 runs sampled)
-
-levelup (leveldown) batch(int, string) x 10000 x 14.19 ops/sec ±2.36% (70 runs sampled)
-levelup (memdown)   batch(int, string) x 10000 x 18.00 ops/sec ±0.93% (47 runs sampled)
-
-levelup (leveldown) batch(int, string) x 100000 x 1.35 ops/sec ±4.27% (11 runs sampled)
-levelup (memdown)   batch(int, string) x 100000 x 1.41 ops/sec ±42.41% (13 runs sampled)
-
-levelup (leveldown) readStream x 10 x 548 ops/sec ±0.71% (87 runs sampled)
-levelup (memdown)   readStream x 10 x 596 ops/sec ±0.50% (55 runs sampled)
-
-levelup (leveldown) readStream x 1000 x 54.06 ops/sec ±1.20% (77 runs sampled)
-levelup (memdown)   readStream x 1000 x 106 ops/sec ±0.73% (84 runs sampled)
-
-levelup (leveldown) readStream x 10000 x 6.00 ops/sec ±1.01% (34 runs sampled)
-levelup (memdown)   readStream x 10000 x 13.04 ops/sec ±0.51% (65 runs sampled)
-
-levelup (leveldown) readStream x 100000 x 0.63 ops/sec ±0.91% (8 runs sampled)
-levelup (memdown)   readStream x 100000 x 1.23 ops/sec ±3.32% (11 runs sampled)
+levelup (leveldown) readStream x 10 x 569 ops/sec ±1.68% (21 runs sampled)
+levelup (memdown)   readStream x 10 x 607 ops/sec ±1.84% (16 runs sampled)
 ```
 
 ## Licence
