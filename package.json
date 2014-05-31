@@ -21,5 +21,13 @@
     "run-series-object": "~1.1.0",
     "xtend": "~3.0.0",
     "chalk": "^0.4.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kesla/level-benchmarks.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kesla/level-benchmarks/issues"
+  },
+  "homepage": "https://github.com/kesla/level-benchmarks"
 }
