@@ -18,7 +18,8 @@
   },
   "dependencies": {
     "benchmark": "^1.0.0",
-    "run-series": "^1.0.2",
-    "xtend": "~3.0.0"
+    "run-series-object": "~1.1.0",
+    "xtend": "~3.0.0",
+    "chalk": "^0.4.0"
   }
 }

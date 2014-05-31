@@ -24,17 +24,16 @@ var extend = require('xtend')
       test.setup(db, length, function () {
         new Benchmark(name, opts)
           .on('complete', function (event) {
-            console.log(event.target.toString())
-            callback()
+            callback(null, event)
           })
           .run({ async: true })
       })
     }
 
-  , benchmarks = function (engines, lengths, opts) {
+  , benchmarks = function (engines, lengths, opts, callback) {
       opts = opts || {}
 
-      var tasks = []
+      var tasks = {}
         , printableEngineName = function (engineName) {
             var len = engines.reduce(
                 function (m, c) {
@@ -49,24 +48,25 @@ var extend = require('xtend')
       Object.keys(tests).forEach(function (key) {
         var test = tests[key]
 
+        tasks[key] = {}
+
         lengths.forEach(function (length) {
+
+          tasks[key][length] = {}
+
           engines.forEach(function (engine) {
             var name = printableEngineName(engine.name) + ' ' + key + ' x ' + length
 
-            tasks.push(function (done) {
+            tasks[key][length][engine.name] = function (done) {
               engine.factory(name, function (err, db) {
                 runTest(db, name, test, length, opts, done)
               })
-            })
-          })
-          tasks.push(function (done) {
-            console.log()
-            done()
+            }
           })
         })
       })
 
-      series(tasks)
+      series(tasks, callback)
     }
 
 module.exports = benchmarks
