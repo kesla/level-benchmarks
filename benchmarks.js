@@ -1,4 +1,5 @@
-var series = require('run-series')
+var extend = require('xtend')
+  , series = require('run-series-object')
 
   , Benchmark = require('benchmark')
 
@@ -9,23 +10,30 @@ var series = require('run-series')
       , 'readStream'        : require('./tests/read-stream.js')
     }
 
-  , runTest = function (db, name, test, length, callback) {
+  , runTest = function (db, name, test, length, opts, callback) {
+      opts = extend(
+          opts
+        , {
+              defer: true
+            , fn: function (deffered) {
+                test(db, length, deffered.resolve.bind(deffered))
+              }
+          }
+      )
+
       test.setup(db, length, function () {
-        new Benchmark(name, {
-            defer: true
-          , fn: function (deffered) {
-              test(db, length, deffered.resolve.bind(deffered))
-            }
-        })
-        .on('complete', function (event) {
-          console.log(event.target.toString())
-          callback()
-        })
-        .run({ async: true })
+        new Benchmark(name, opts)
+          .on('complete', function (event) {
+            console.log(event.target.toString())
+            callback()
+          })
+          .run({ async: true })
       })
     }
 
-  , benchmarks = function (engines, lengths) {
+  , benchmarks = function (engines, lengths, opts) {
+      opts = opts || {}
+
       var tasks = []
         , printableEngineName = function (engineName) {
             var len = engines.reduce(
@@ -47,7 +55,7 @@ var series = require('run-series')
 
             tasks.push(function (done) {
               engine.factory(name, function (err, db) {
-                runTest(db, name, test, length, done)
+                runTest(db, name, test, length, opts, done)
               })
             })
           })

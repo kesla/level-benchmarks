@@ -21,4 +21,4 @@ var engines = [
   , lengths = [ 10, 1000, 10000, 100000 ]
   , benchmarks = require('./benchmarks')
 
-benchmarks(engines, lengths)
+benchmarks(engines, lengths, { maxTime: 1 })
