@@ -35,6 +35,23 @@ var path = require('path')
       })
     }
 
+  , format = function (result) {
+      Object.keys(result).forEach(function (testName) {
+        var lengths = result[testName]
+
+        Object.keys(lengths).forEach(function (length) {
+          var engines = lengths[length]
+
+          Object.keys(engines).forEach(function (engine) {
+            var benchmark = engines[engine]
+
+            console.log(benchmark.target.toString())
+          })
+          console.log()
+        })
+      })
+    }
+
   , benchmarks = function (engines, lengths, opts, callback) {
       opts = opts || {}
 
@@ -79,3 +96,4 @@ var path = require('path')
     }
 
 module.exports = benchmarks
+module.exports.format = format
