@@ -36,6 +36,7 @@ var path = require('path')
     }
 
   , format = function (result) {
+      var output = ''
       Object.keys(result).forEach(function (testName) {
         var lengths = result[testName]
 
@@ -45,11 +46,12 @@ var path = require('path')
           Object.keys(engines).forEach(function (engine) {
             var benchmark = engines[engine]
 
-            console.log(benchmark.target.toString())
+            output = output + benchmark.target.toString() + '\n'
           })
-          console.log()
+          output = output + '\n'
         })
       })
+      return output
     }
 
   , benchmarks = function (engines, lengths, opts, callback) {

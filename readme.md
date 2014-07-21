@@ -35,37 +35,24 @@ var engines = [
   , benchmarks = require('./benchmarks')
 
 benchmarks(engines, lengths, { maxTime: 1 }, function (err, result) {
-  Object.keys(result).forEach(function (testName) {
-    var lengths = result[testName]
-
-    Object.keys(lengths).forEach(function (length) {
-      var engines = lengths[length]
-
-      Object.keys(engines).forEach(function (engine) {
-        var benchmark = engines[engine]
-
-        console.log(benchmark.target.toString())
-      })
-      console.log()
-    })
-  })
+  console.log(benchmarks.format(result))
 })
 ```
 
 ### Output
 
 ```
-levelup (leveldown) put(int, string) x 10 x 587 ops/sec ±1.63% (17 runs sampled)
-levelup (memdown)   put(int, string) x 10 x 659 ops/sec ±1.70% (16 runs sampled)
+levelup (leveldown) put(int, string) x 10 x 604 ops/sec ±2.63% (18 runs sampled)
+levelup (memdown)   put(int, string) x 10 x 660 ops/sec ±1.33% (22 runs sampled)
 
-levelup (leveldown) get(int):string x 10 x 594 ops/sec ±1.51% (17 runs sampled)
-levelup (memdown)   get(int):string x 10 x 663 ops/sec ±0.92% (16 runs sampled)
+levelup (leveldown) get(int):string x 10 x 589 ops/sec ±1.51% (18 runs sampled)
+levelup (memdown)   get(int):string x 10 x 667 ops/sec ±2.39% (16 runs sampled)
 
-levelup (leveldown) batch(int, string) x 10 x 649 ops/sec ±2.14% (16 runs sampled)
-levelup (memdown)   batch(int, string) x 10 x 659 ops/sec ±1.04% (20 runs sampled)
+levelup (leveldown) batch(int, string) x 10 x 652 ops/sec ±3.77% (13 runs sampled)
+levelup (memdown)   batch(int, string) x 10 x 681 ops/sec ±4.48% (16 runs sampled)
 
-levelup (leveldown) readStream x 10 x 548 ops/sec ±1.92% (21 runs sampled)
-levelup (memdown)   readStream x 10 x 588 ops/sec ±1.78% (20 runs sampled)
+levelup (leveldown) readStream x 10 x 564 ops/sec ±2.16% (19 runs sampled)
+levelup (memdown)   readStream x 10 x 610 ops/sec ±1.81% (20 runs sampled)
 ```
 
 ## Licence
