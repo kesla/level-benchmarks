@@ -1,7 +1,12 @@
-var extend = require('xtend')
+var path = require('path')
+  , tmpdir = require('os').tmpdir()
+
+  , extend = require('xtend')
+  , rimraf = require('rimraf')
   , series = require('run-series-object')
 
   , Benchmark = require('benchmark')
+  , count = 0
 
   , tests = {
         'put(int, string)'  : require('./tests/put-int-string.js')
@@ -58,8 +63,12 @@ var extend = require('xtend')
             var name = printableEngineName(engine.name) + ' ' + key + ' x ' + length
 
             tasks[key][length][engine.name] = function (done) {
-              engine.factory(name, function (err, db) {
-                runTest(db, name, test, length, opts, done)
+              var dir = path.join(tmpdir, 'level-benchmarks-' + (count++))
+
+              rimraf(dir, function () {
+                engine.factory(dir, function (err, db) {
+                  runTest(db, name, test, length, opts, done)
+                })
               })
             }
           })

@@ -24,21 +24,11 @@ npm install level-benchmarks
 var engines = [
         {
             name: 'levelup (leveldown)'
-          , factory: function (name, callback) {
-              var db = require('level-test')()(name)
-
-              db.once('ready', function () {
-                callback(null, db)
-              })
-            }
+          , factory: require('level')
         }
       , {
             name: 'levelup (memdown)'
-          , factory: function (name, callback) {
-              var db = require('level-test')( { mem: true })(name)
-
-              callback(null, db)
-            }
+          , factory: require('level-mem')
         }
     ]
   , lengths = [ 10 ]
@@ -65,17 +55,17 @@ benchmarks(engines, lengths, { maxTime: 1 }, function (err, result) {
 ### Output
 
 ```
-levelup (leveldown) put(int, string) x 10 x 616 ops/sec ±2.98% (20 runs sampled)
-levelup (memdown)   put(int, string) x 10 x 743 ops/sec ±1.97% (20 runs sampled)
+levelup (leveldown) put(int, string) x 10 x 587 ops/sec ±1.63% (17 runs sampled)
+levelup (memdown)   put(int, string) x 10 x 659 ops/sec ±1.70% (16 runs sampled)
 
-levelup (leveldown) get(int):string x 10 x 611 ops/sec ±1.23% (20 runs sampled)
-levelup (memdown)   get(int):string x 10 x 706 ops/sec ±1.12% (20 runs sampled)
+levelup (leveldown) get(int):string x 10 x 594 ops/sec ±1.51% (17 runs sampled)
+levelup (memdown)   get(int):string x 10 x 663 ops/sec ±0.92% (16 runs sampled)
 
-levelup (leveldown) batch(int, string) x 10 x 659 ops/sec ±1.69% (17 runs sampled)
-levelup (memdown)   batch(int, string) x 10 x 659 ops/sec ±1.35% (10 runs sampled)
+levelup (leveldown) batch(int, string) x 10 x 649 ops/sec ±2.14% (16 runs sampled)
+levelup (memdown)   batch(int, string) x 10 x 659 ops/sec ±1.04% (20 runs sampled)
 
-levelup (leveldown) readStream x 10 x 569 ops/sec ±1.68% (21 runs sampled)
-levelup (memdown)   readStream x 10 x 607 ops/sec ±1.84% (16 runs sampled)
+levelup (leveldown) readStream x 10 x 548 ops/sec ±1.92% (21 runs sampled)
+levelup (memdown)   readStream x 10 x 588 ops/sec ±1.78% (20 runs sampled)
 ```
 
 ## Licence

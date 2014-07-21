@@ -1,21 +1,11 @@
 var engines = [
         {
             name: 'levelup (leveldown)'
-          , factory: function (name, callback) {
-              var db = require('level-test')()(name)
-
-              db.once('ready', function () {
-                callback(null, db)
-              })
-            }
+          , factory: require('level')
         }
       , {
             name: 'levelup (memdown)'
-          , factory: function (name, callback) {
-              var db = require('level-test')( { mem: true })(name)
-
-              callback(null, db)
-            }
+          , factory: require('level-mem')
         }
     ]
   , lengths = [ 10 ]
