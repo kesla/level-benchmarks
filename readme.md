@@ -8,7 +8,7 @@ Run benchmarks against levelup-compatible engines
 
 ## Kudos
 
-This is based upon the tests in [levelup](https://www.npmjs.org/package/levelup).
+This is based upon the tests in [levelup](https://www.npmjs.org/package/levelup), but extended with more tests.
 
 ## Installation
 

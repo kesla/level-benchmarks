@@ -9,10 +9,11 @@ var path = require('path')
   , count = 0
 
   , tests = {
-        'put(int, string)'  : require('./tests/put-int-string.js')
-      , 'get(int):string'   : require('./tests/get-int.js')
-      , 'batch(int, string)': require('./tests/batch-int-string.js')
-      , 'readStream'        : require('./tests/read-stream.js')
+        'put(int, string)'              : require('./tests/put-int-string.js')
+      , 'get(int):string'               : require('./tests/get-int.js')
+      , 'batch(int, string)'            : require('./tests/batch-int-string.js')
+      , 'readStream (iterate whole db)' : require('./tests/read-stream.js')
+      , 'readStream (iterate 10% of db)': require('./tests/read-stream-part.js')
     }
 
   , runTest = function (db, name, test, length, opts, callback) {
